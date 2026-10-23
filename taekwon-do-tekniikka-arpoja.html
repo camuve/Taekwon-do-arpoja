@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taekwon-Do-tekniikka-arpoja</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#172033;--muted:#68738a;--accent:#2457d6;--line:#dce2ee}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:28px 16px;display:grid;place-items:center;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,#e4ebff 0,var(--bg) 48%);color:var(--ink)}
+main{width:min(100%,720px);background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,5vw,42px);box-shadow:0 18px 55px #17203312}
+.eyebrow{color:var(--accent);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.76rem}h1{margin:10px 0 8px;font-size:clamp(1.8rem,5vw,2.7rem);line-height:1.1}.intro{margin:0 0 28px;color:var(--muted);line-height:1.6}
+h2{font-size:1rem;margin:0 0 12px}.gups{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.gup-option{position:relative}.gup-option input{position:absolute;width:1px;height:1px;opacity:0}.gup-option label{display:flex;align-items:center;justify-content:center;min-height:54px;border:2px solid var(--line);border-radius:13px;cursor:pointer;font-weight:750;transition:.15s ease;user-select:none}.gup-option input:checked+label{color:white;background:var(--accent);border-color:var(--accent);box-shadow:0 3px 10px #2457d633}.gup-option input:focus-visible+label{outline:3px solid #93b1ff;outline-offset:3px}.gup-option label:hover{border-color:var(--accent)}
+.controls{display:flex;align-items:center;gap:12px;margin:14px 0 22px;flex-wrap:wrap}.hint{font-size:.88rem;color:var(--muted);margin:0;flex:1 1 250px}.toggle{display:flex;gap:8px;align-items:center;font-size:.9rem;font-weight:650}
+button{border:0;border-radius:13px;width:100%;padding:15px 20px;background:var(--accent);color:white;font:inherit;font-weight:800;cursor:pointer;transition:background .15s ease,transform .15s ease}button:hover{background:#1944ad}button:active{transform:scale(.99)}button:focus-visible{outline:3px solid #93b1ff;outline-offset:3px}
+.result{margin-top:22px;padding:22px;border-radius:16px;background:#f0f4ff;border:1px solid #dce6ff;min-height:140px;display:flex;flex-direction:column;justify-content:center}.result-label{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}#technique{font-size:clamp(1.3rem,4vw,2rem);font-weight:850;margin-top:8px;overflow-wrap:anywhere}#resultMeta{color:var(--muted);margin-top:7px;font-size:.9rem}.status{min-height:1.4em;color:#a13b24;font-size:.9rem;margin:12px 0 0}footer{text-align:center;margin-top:24px;color:var(--muted);font-size:.8rem}
+@media(max-width:480px){.gups{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">Taekwon-Do · Harjoittelu</div>
+<h1>Tekniikka-arpoja</h1>
+<p class="intro">Valitse yksi tai useampi gup-vyöarvo ja arvo niihin kuuluva tekniikka harjoittelua varten.</p>
+<section aria-labelledby="gupHeading"><h2 id="gupHeading">Valitse gup-arvot</h2>
+<div class="gups" id="gupChoices"></div>
+<div class="controls"><p class="hint">Napauta vyöarvoja valitaksesi yhden tai useamman. Valitut vyöarvot näkyvät sinisinä.</p>
+<label class="toggle"><input id="includeLower" type="checkbox"> Sisällytä myös alemmat gupit</label></div></section>
+<button id="drawButton" type="button">Arvo tekniikka</button>
+<div class="result" aria-live="polite" aria-atomic="true"><div class="result-label">Arvottu tekniikka</div><div id="technique">Valitse gup ja arvo tekniikka</div><div id="resultMeta"></div></div>
+<p class="status" id="status" role="status"></p>
+<footer>Tekniikkadata on erillisessä tekniikat.json-tiedostossa.</footer>
+</main>
+<script>
+/*
+  Tekniikat ladataan erillisestä tekniikat.json-tiedostosta.
+  Kun haluat päivittää listaa, muokkaa vain JSON-tiedostoa.
+  Jos avaat HTML:n suoraan tiedostona, selain voi estää JSON-tiedoston
+  lukemisen. Julkaistulla verkkosivulla tai paikallisella web-palvelimella se toimii.
+*/
+const GUPS = ["10","9","8","7","6","5","4","3","2","1"];
+const choices = document.getElementById("gupChoices");
+const techniqueEl = document.getElementById("technique");
+const metaEl = document.getElementById("resultMeta");
+const statusEl = document.getElementById("status");
+let techniquesByGup = {};
+
+GUPS.forEach(gup => {
+  const wrapper = document.createElement("div");
+  wrapper.className = "gup-option";
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.name = "gup";
+  input.value = gup;
+  input.id = `gup-${gup}`;
+  input.checked = false;
+  const label = document.createElement("label");
+  label.htmlFor = input.id;
+  label.textContent = `${gup}. gup`;
+  wrapper.append(input, label);
+  choices.append(wrapper);
+});
+
+async function loadTechniques() {
+  try {
+    const response = await fetch("./tekniikat.json");
+    if (!response.ok) throw new Error("JSON-tiedostoa ei löytynyt");
+    techniquesByGup = await response.json();
+    statusEl.textContent = "";
+  } catch (error) {
+    statusEl.textContent = "Tekniikkatiedostoa ei saatu ladattua. Avaa sivusto verkkopalvelimen kautta ja varmista, että tekniikat.json on samassa kansiossa.";
+  }
+}
+document.getElementById("drawButton").addEventListener("click", () => {
+  const selected = [...document.querySelectorAll('input[name="gup"]:checked')].map(el => el.value);
+  statusEl.textContent = ""; metaEl.textContent = "";
+  if (!selected.length) { techniqueEl.textContent = "Valitse ensin vähintään yksi gup"; statusEl.textContent = "Napauta yllä vähintään yhtä vyöarvoa, esimerkiksi 8. gup."; return; }
+  const includeLower = document.getElementById("includeLower").checked;
+  const selectedNums = selected.map(Number);
+  const eligible = includeLower ? GUPS.filter(g => selectedNums.some(n => Number(g) >= n)) : selected;
+  const pool = eligible.flatMap(gup => Object.entries(techniquesByGup[gup] || {}).flatMap(([category, names]) => names.map(name => ({name,gup,category}))));
+  if (!pool.length) { techniqueEl.textContent = "Tekniikoita ei löytynyt"; statusEl.textContent = "Tarkista tekniikat.json-tiedosto ja valitut gup-arvot."; return; }
+  const picked = pool[Math.floor(Math.random() * pool.length)];
+  techniqueEl.textContent = picked.name;
+  metaEl.textContent = `${picked.gup}. gup · ${picked.category}`;
+});
+loadTechniques();
+</script></body></html>
