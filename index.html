@@ -2,18 +2,38 @@
 <html lang="fi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f4f6fb">
 <title>Taekwon-Do-tekniikka-arpoja</title>
 <style>
 :root{--bg:#f4f6fb;--card:#fff;--ink:#172033;--muted:#68738a;--accent:#2457d6;--line:#dce2ee}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:28px 16px;display:grid;place-items:center;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,#e4ebff 0,var(--bg) 48%);color:var(--ink)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;min-height:100dvh;padding: max(16px, env(safe-area-inset-top)) 14px max(16px, env(safe-area-inset-bottom));display:grid;place-items:center;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,#e4ebff 0,var(--bg) 48%);color:var(--ink)}
 main{width:min(100%,720px);background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,5vw,42px);box-shadow:0 18px 55px #17203312}
 .eyebrow{color:var(--accent);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.76rem}h1{margin:10px 0 8px;font-size:clamp(1.8rem,5vw,2.7rem);line-height:1.1}.intro{margin:0 0 28px;color:var(--muted);line-height:1.6}
-h2{font-size:1rem;margin:0 0 12px}.gups{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.gup-option{position:relative}.gup-option input{position:absolute;width:1px;height:1px;opacity:0}.gup-option label{display:flex;align-items:center;justify-content:center;min-height:54px;border:2px solid var(--line);border-radius:13px;cursor:pointer;font-weight:750;transition:.15s ease;user-select:none}.gup-option input:checked+label{color:white;background:var(--accent);border-color:var(--accent);box-shadow:0 3px 10px #2457d633}.gup-option input:focus-visible+label{outline:3px solid #93b1ff;outline-offset:3px}.gup-option label:hover{border-color:var(--accent)}
+h2{font-size:1rem;margin:0 0 12px}.gups{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.gup-option{position:relative}.gup-option input{position:absolute;width:1px;height:1px;opacity:0}.gup-option label{display:flex;align-items:center;justify-content:center;min-height:58px;border:2px solid var(--line);border-radius:13px;cursor:pointer;font-weight:750;transition:.15s ease;user-select:none}.gup-option input:checked+label{color:white;background:var(--accent);border-color:var(--accent);box-shadow:0 3px 10px #2457d633}.gup-option input:focus-visible+label{outline:3px solid #93b1ff;outline-offset:3px}.gup-option label:hover{border-color:var(--accent)}
 .controls{display:flex;align-items:center;gap:12px;margin:14px 0 22px;flex-wrap:wrap}.hint{font-size:.88rem;color:var(--muted);margin:0;flex:1 1 250px}.toggle{display:flex;gap:8px;align-items:center;font-size:.9rem;font-weight:650}
-button{border:0;border-radius:13px;width:100%;padding:15px 20px;background:var(--accent);color:white;font:inherit;font-weight:800;cursor:pointer;transition:background .15s ease,transform .15s ease}button:hover{background:#1944ad}button:active{transform:scale(.99)}button:focus-visible{outline:3px solid #93b1ff;outline-offset:3px}
+button{border:0;border-radius:13px;width:100%;min-height:56px;padding:16px 20px;background:var(--accent);color:white;font:inherit;font-weight:800;cursor:pointer;transition:background .15s ease,transform .15s ease}button:hover{background:#1944ad}button:active{transform:scale(.99)}button:focus-visible{outline:3px solid #93b1ff;outline-offset:3px}
 .result{margin-top:22px;padding:22px;border-radius:16px;background:#f0f4ff;border:1px solid #dce6ff;min-height:140px;display:flex;flex-direction:column;justify-content:center}.result-label{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}#technique{font-size:clamp(1.3rem,4vw,2rem);font-weight:850;margin-top:8px;overflow-wrap:anywhere}#resultMeta{color:var(--muted);margin-top:7px;font-size:.9rem}.status{min-height:1.4em;color:#a13b24;font-size:.9rem;margin:12px 0 0}footer{text-align:center;margin-top:24px;color:var(--muted);font-size:.8rem}
-@media(max-width:480px){.gups{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){body{padding-left:12px;padding-right:12px;align-items:start}main{padding:22px 18px;border-radius:20px}.intro{margin-bottom:22px}.gups{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.gup-option label{min-height:58px;font-size:1rem}.controls{align-items:flex-start;gap:14px}.toggle{font-size:.95rem;line-height:1.4;align-items:flex-start}.toggle input{width:20px;height:20px;flex:0 0 auto;margin-top:1px}button{font-size:1.05rem}.result{padding:20px 17px;min-height:130px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.timer-panel{margin:18px 0 20px;padding:18px;border:1px solid var(--line);border-radius:16px;background:#fbfcff}
+.timer-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.timer-row h2{margin:0}
+.switch-label{display:flex;align-items:center;gap:9px;font-weight:700;font-size:.95rem}
+.switch-label input{width:21px;height:21px;accent-color:var(--accent);flex:0 0 auto}
+#intervalSlider{width:100%;accent-color:var(--accent);margin:16px 0 4px}
+.timer-scale{display:flex;justify-content:space-between;color:var(--muted);font-size:.82rem}
+#intervalValue{font-size:1.2rem;font-weight:850;color:var(--accent);font-variant-numeric:tabular-nums}
+.timer-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+button.secondary{background:#e9eefb;color:var(--ink);border:1px solid #d5def4}
+button.secondary:hover{background:#dce6ff}
+button:disabled{opacity:.45;cursor:not-allowed}
+#countdown{font-size:.9rem;color:var(--muted);margin-top:10px;min-height:1.3em}
+@media(max-width:520px){.timer-panel{padding:16px}.timer-actions{grid-template-columns:1fr}.switch-label{font-size:.92rem}}
+
 </style>
 </head>
 <body><main>
@@ -24,18 +44,37 @@ button{border:0;border-radius:13px;width:100%;padding:15px 20px;background:var(-
 <div class="gups" id="gupChoices"></div>
 <div class="controls"><p class="hint">Napauta vyöarvoja valitaksesi yhden tai useamman. Valitut vyöarvot näkyvät sinisinä.</p>
 <label class="toggle"><input id="includeLower" type="checkbox"> Sisällytä myös alemmat gupit</label></div></section>
+
+<section class="timer-panel" aria-labelledby="practiceHeading">
+  <div class="timer-row">
+    <h2 id="practiceHeading">Harjoittelun asetukset</h2>
+    <label class="switch-label"><input id="timerEnabled" type="checkbox"> Ajastin käyttöön</label>
+  </div>
+  <label class="switch-label" for="voiceEnabled" style="margin-top:14px">
+    <input id="voiceEnabled" type="checkbox"> <span id="voiceLabel">Ääni pois päältä</span>
+  </label>
+  <div id="timerSettings" hidden>
+    <div class="timer-row" style="margin-top:16px">
+      <label for="intervalSlider"><strong>Uusi tekniikka joka</strong></label>
+      <span id="intervalValue">30 s</span>
+    </div>
+    <input id="intervalSlider" type="range" min="30" max="120" step="5" value="30">
+    <div class="timer-scale"><span>30 sekuntia</span><span>2 minuuttia</span></div>
+    <div class="timer-actions">
+      <button id="startTimerButton" type="button">Käynnistä harjoittelu</button>
+      <button id="stopTimerButton" class="secondary" type="button" disabled>Pysäytä</button>
+    </div>
+    <p id="countdown" aria-live="polite">Ajastin ei ole käynnissä.</p>
+  </div>
+</section>
+
 <button id="drawButton" type="button">Arvo tekniikka</button>
 <div class="result" aria-live="polite" aria-atomic="true"><div class="result-label">Arvottu tekniikka</div><div id="technique">Valitse gup ja arvo tekniikka</div><div id="resultMeta"></div></div>
 <p class="status" id="status" role="status"></p>
-<footer>Tekniikkadata on erillisessä tekniikat.json-tiedostossa.</footer>
+<footer>Ajastin ja puhe ovat valinnaisia. Voit arpoa tekniikoita myös käsin ilman ajastinta.</footer>
 </main>
 <script>
-/*
-  Tekniikat ladataan erillisestä tekniikat.json-tiedostosta.
-  Kun haluat päivittää listaa, muokkaa vain JSON-tiedostoa.
-  Jos avaat HTML:n suoraan tiedostona, selain voi estää JSON-tiedoston
-  lukemisen. Julkaistulla verkkosivulla tai paikallisella web-palvelimella se toimii.
-*/
+/* Itsenäinen versio: tekniikat on upotettu tähän tiedostoon, joten se toimii myös iPhonen Tiedostot-sovelluksesta avattuna. */
 const GUPS = ["10","9","8","7","6","5","4","3","2","1"];
 const choices = document.getElementById("gupChoices");
 const techniqueEl = document.getElementById("technique");
@@ -52,6 +91,7 @@ GUPS.forEach(gup => {
   input.value = gup;
   input.id = `gup-${gup}`;
   input.checked = false;
+  input.setAttribute("aria-label", `${gup}. gup`);
   const label = document.createElement("label");
   label.htmlFor = input.id;
   label.textContent = `${gup}. gup`;
@@ -59,28 +99,129 @@ GUPS.forEach(gup => {
   choices.append(wrapper);
 });
 
-async function loadTechniques() {
-  try {
-    const response = await fetch("./tekniikat.json");
-    if (!response.ok) throw new Error("JSON-tiedostoa ei löytynyt");
-    techniquesByGup = await response.json();
-    statusEl.textContent = "";
-  } catch (error) {
-    statusEl.textContent = "Tekniikkatiedostoa ei saatu ladattua. Avaa sivusto verkkopalvelimen kautta ja varmista, että tekniikat.json on samassa kansiossa.";
+// Sisäänrakennettu varadata mahdollistaa käytön myös silloin, kun HTML
+// avataan suoraan tiedostona (file://), jolloin selain voi estää fetch-kutsun.
+const EMBEDDED_TECHNIQUES = {"10":{"Käsitekniikat":["Gonnun so palmok najunde makgi","Gonnun so sonkal najunde bakuro makgi","Gonnun so kaunde an palmok makgi","Niunja so kaunde an palmok makgi","Gonnun so kaunde bakat palmok makgi","Gonnun so kaunde baro jirugi","Gonnun so kaunde bandae jirugi"],"Jalkatekniikat":["Apcha olligi","Apcha busigi"]},"9":{"Käsitekniikat":["Niunja so kaunde baro jirugi","Niunja so kaunde bandae jirugi","Gonnun so kaunde sonkal makgi"]},"8":{"Käsitekniikat":["Niunja so kaunde palmok daebi makgi","Niunja so kaunde sonkal daebi makgi","Gonnun so nopunde baro jirugi","Niunja so sang palmok makgi","Gonnun so nopunde chookyo makgi","Niunja so kaunde sonkal bakuro taerigi","Niunja so kaunde yop joomuk bakuro taerigi","Annun so kaunde baro jirugi"],"Jalkatekniikat":["Yop apcha busigi","Dollyo chagi","Yop dollyo chagi","Yopcha jirugi","Naeryo chagi","Yopcha olligi","Twimyo apcha busigi"]},"7":{"Käsitekniikat":["Gonnun so nopunde bakat palmok makgi","Gonnun so kaunde sun sonkut tulgi","Gonnun so nopunde dung joomuk yop taerigi","Gonnun so nopunde bakat palmok hechyo makgi","Gonnun so kyocha joomuk najunde noollo makgi"],"Potkutekniikat":["Twimyo dollyo chagi","Twimyo yopcha jirugi"]},"6":{"Käsitekniikat":["Niunja so nopunde sonkal anuro taerigi","Gojung so kaunde baro jirugi","Gonnun so kaunde an palmok dollimyo makgi"],"Jalkatekniikat":["Dwitcha jirugi","Tora yopcha jirugi"]},"5":{"Käsitekniikat":["Gonnun so kaunde sonbadak golcho makgi","Gonnun so kaunde ap palkup taerigi","Kyocha so nopunde dung joomuk yop taerigi","Gonnun so nopunde doo palmok makgi"],"Jalkatekniikat":["Goro chagi"]},"4":{"Käsitekniikat":["Niunja so kaunde dung sonkal bakuro makgi","Dwitbal so sonbadak ollyo makgi","Gonnun so nopunde wi palkup taerigi","Gonnun so nopunde sang joomuk sewo jirugi","Gonnun so najunde dwijibo joomuk jirugi","Gonnun so nopunde kyocha joomuk chookyo makgi","Nachuo so najunde sonbadak noollo makgi","Moa so kaunde giokja jirugi","Gojung so digutja makgi"],"Jalkatekniikat":["Bandae dollyo chagi","Aiemmin opetellut potkut nopunde-korkeuteen","Twimyo dwitchagi","Twimyo naeryo chagi"]},"3":{"Käsitekniikat":["Gonnun so najunde dwijibo sonkut tulgi","Moa so dung joomuk yopdwi taerigi","Moa so sang yop palkup tulgi","Annun so bakat palmok san makgi","Gonnun so morijapgi","Gonnun so nopunde opun sonkut tulgi","Niunja so dung joomuk yopdwi taerigi","Niunja so najunde doo palmok miro makgi","Niunja so najunde palmok daebi makgi","Niunja so najunde sonkal daebi makgi"],"Jalkatekniikat":["Bandae dollyo goro chagi","Moorup ollyo chagi","Twimyo goro chagi"]},"2":{"Käsitekniikat":["Annun so kaunde sonbadak miro makgi","Niunja so ollyo jirugi","Soo jik so sonkal naeryo taerigi","Niunja so yop palkup tulgi","Moa so an palmok nopunde makgi"],"Jalkatekniikat":["Bituro chagi","Bandal chagi","Golcho chagi","Sewo chagi","Noollo chagi","Twimyo bandae dollyo chagi"]},"1":{"Käsitekniikat":["Gonnun so nopunde sonkal ap taerigi","Gonnun so nopunde sonkal dung ap taerigi","Annun so bakat palmok ap makgi","Niunja so kaunde kyocha sonkal momchau makgi","Gonnun so sang sonbadak ollyo makgi"],"Potkutekniikat":["Twimyo tora yopcha jirugi"]}};
+
+// Käytetään sisäänrakennettua tekniikkadataa. Ei fetch-kutsuja eikä erillisiä tiedostoja.
+techniquesByGup = EMBEDDED_TECHNIQUES;
+
+
+const timerEnabledEl = document.getElementById("timerEnabled");
+const timerSettingsEl = document.getElementById("timerSettings");
+const intervalSlider = document.getElementById("intervalSlider");
+const intervalValue = document.getElementById("intervalValue");
+const voiceEnabledEl = document.getElementById("voiceEnabled");
+const voiceLabelEl = document.getElementById("voiceLabel");
+const startTimerButton = document.getElementById("startTimerButton");
+const stopTimerButton = document.getElementById("stopTimerButton");
+const countdownEl = document.getElementById("countdown");
+let intervalId = null;
+let countdownId = null;
+let nextDrawAt = 0;
+let isRunning = false;
+
+function speakTechnique(name) {
+  if (!voiceEnabledEl.checked) return;
+  if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+    statusEl.textContent = "Tämä selain ei tue puhetoimintoa. Kokeile Safaria tai Chromea.";
+    return;
   }
+  // Korvaa edellinen puhe, jotta tekniikan nimi ei jää jonoon.
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(name);
+  utterance.lang = "fi-FI";
+  utterance.rate = 0.88;
+  utterance.pitch = 1;
+  window.speechSynthesis.speak(utterance);
 }
-document.getElementById("drawButton").addEventListener("click", () => {
+
+function drawTechnique({ announce = true } = {}) {
   const selected = [...document.querySelectorAll('input[name="gup"]:checked')].map(el => el.value);
-  statusEl.textContent = ""; metaEl.textContent = "";
-  if (!selected.length) { techniqueEl.textContent = "Valitse ensin vähintään yksi gup"; statusEl.textContent = "Napauta yllä vähintään yhtä vyöarvoa, esimerkiksi 8. gup."; return; }
+  statusEl.textContent = "";
+  metaEl.textContent = "";
+  if (!selected.length) {
+    techniqueEl.textContent = "Valitse ensin vähintään yksi gup";
+    statusEl.textContent = "Napauta yllä vähintään yhtä vyöarvoa, esimerkiksi 8. gup.";
+    return false;
+  }
   const includeLower = document.getElementById("includeLower").checked;
   const selectedNums = selected.map(Number);
   const eligible = includeLower ? GUPS.filter(g => selectedNums.some(n => Number(g) >= n)) : selected;
   const pool = eligible.flatMap(gup => Object.entries(techniquesByGup[gup] || {}).flatMap(([category, names]) => names.map(name => ({name,gup,category}))));
-  if (!pool.length) { techniqueEl.textContent = "Tekniikoita ei löytynyt"; statusEl.textContent = "Tarkista tekniikat.json-tiedosto ja valitut gup-arvot."; return; }
+  if (!pool.length) {
+    techniqueEl.textContent = "Tekniikoita ei löytynyt";
+    statusEl.textContent = "Tarkista tekniikkadata ja valitut gup-arvot.";
+    return false;
+  }
   const picked = pool[Math.floor(Math.random() * pool.length)];
   techniqueEl.textContent = picked.name;
   metaEl.textContent = `${picked.gup}. gup · ${picked.category}`;
+  if (announce) speakTechnique(picked.name);
+  return true;
+}
+
+function updateIntervalLabel() {
+  const seconds = Number(intervalSlider.value);
+  intervalValue.textContent = seconds < 60 ? `${seconds} s` : (seconds === 120 ? "2 min" : `${Math.floor(seconds / 60)} min ${seconds % 60} s`);
+}
+function updateCountdown() {
+  if (!isRunning) return;
+  const secondsLeft = Math.max(0, Math.ceil((nextDrawAt - Date.now()) / 1000));
+  countdownEl.textContent = `Seuraava tekniikka ${secondsLeft} s kuluttua`;
+}
+function stopPractice() {
+  isRunning = false;
+  if (intervalId !== null) window.clearInterval(intervalId);
+  if (countdownId !== null) window.clearInterval(countdownId);
+  intervalId = null;
+  countdownId = null;
+  startTimerButton.disabled = false;
+  stopTimerButton.disabled = true;
+  countdownEl.textContent = "Harjoittelu pysäytetty.";
+  if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+}
+function startPractice() {
+  if (!timerEnabledEl.checked) {
+    statusEl.textContent = "Laita ensin Ajastin käyttöön.";
+    return;
+  }
+  if (!document.querySelector('input[name="gup"]:checked')) {
+    statusEl.textContent = "Valitse ensin vähintään yksi gup.";
+    return;
+  }
+  stopPractice();
+  if (!drawTechnique()) return;
+  isRunning = true;
+  startTimerButton.disabled = true;
+  stopTimerButton.disabled = false;
+  const intervalMs = Number(intervalSlider.value) * 1000;
+  nextDrawAt = Date.now() + intervalMs;
+  updateCountdown();
+  intervalId = window.setInterval(() => {
+    if (!drawTechnique()) {
+      stopPractice();
+      return;
+    }
+    nextDrawAt = Date.now() + intervalMs;
+    updateCountdown();
+  }, intervalMs);
+  countdownId = window.setInterval(updateCountdown, 250);
+}
+
+document.getElementById("drawButton").addEventListener("click", () => drawTechnique());
+timerEnabledEl.addEventListener("change", () => {
+  timerSettingsEl.hidden = !timerEnabledEl.checked;
+  if (!timerEnabledEl.checked) stopPractice();
 });
-loadTechniques();
+intervalSlider.addEventListener("input", updateIntervalLabel);
+voiceEnabledEl.addEventListener("change", () => {
+  voiceLabelEl.textContent = voiceEnabledEl.checked ? "Ääni päällä" : "Ääni pois päältä";
+  if (!voiceEnabledEl.checked && "speechSynthesis" in window) window.speechSynthesis.cancel();
+});
+startTimerButton.addEventListener("click", startPractice);
+stopTimerButton.addEventListener("click", stopPractice);
+updateIntervalLabel();
+
+
 </script></body></html>
